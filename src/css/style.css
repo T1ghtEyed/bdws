@@ -1,0 +1,12 @@
+#navbar {
+  position: fixed;
+  width: 100%;
+  z-index: 1; }
+
+section#main-jumbo {
+  padding-top: 150px;
+  background-color: #2FB6CE;
+  border-radius: 0; }
+
+.jumbo-header {
+  font-size: 30px; }

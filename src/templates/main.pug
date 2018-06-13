@@ -1,0 +1,266 @@
+doctype html
+html
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width", initial-scale="1.0")
+    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+
+    link(rel="stylesheet", 
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css", 
+      integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB", 
+      crossorigin="anonymous"
+    )
+    link(rel="stylesheet", href="./css/style.css")
+
+    title BadDogWebStd.
+
+  body
+    // Navigation bar
+    div.d-flex.flex-column.flex-md-row.align-items-center.p-3.px-md-4.bg-white.border-bottom.box-shadow#navbar
+      h5.my-0.mr-md-auto.font-weight-normal BadDogWebStd.
+      nav.my-2.my-md-0.mr-md-3
+        a.p-2.text-dark(href="#") Главная
+        a.p-2.text-dark(href="#about") О нас
+        a.p-2.text-dark(href="#services") Услуги
+        a.p-2.text-dark(href="#contacts") Контакты
+      a.btn.btn-outline-primary(href="#") Заказать
+
+    //Jumbotron
+    section.jumbotron.mb-0#main-jumbo
+      div.container.text-right
+        h1.display-3.text-white.text-left BadDogWebStd.
+        p.lead.text-white.text-left.
+          Для каждой, даже самой маленькой компании необходимо правльно преподнести себя клиенту во всемирной паутине. Наши опытные и талантливые разработчики помогут вам создать сайт вашей мечты... Сайт, который с 99,99% вероятностью привлечет ваших потенциальных покупателей.
+        hr.my-4(style={color: '#fff', background: '#fff'})
+        p.text-white Не терпиться сделать заказ? Просто нажмите на кнопку
+        a.btn.btn-primary.btn-lg.text-white Я ХОЧУ ДАТЬ ДЕНЯК!!!
+    
+    //-Mixin for jumbotrons in each category
+    mixin createJumbo(content)
+      div.jumbotron.text-center.mb-0(style={background: '#fff'})
+        h1.display-4.jumbo-header #{content.title}
+        p.lead.text-muted #{content.text}
+
+    //About
+    div.container#about
+      //-Data for jumbotron
+      -
+        var aboutJumbo = {
+          title: 'Больше о нас',
+          text: 'Наша команда состоит только из одного человкеа, зато какого! Взявший награду "РАБОТНИК МЕСЯЦА" аж целых 11 раз из 12, он несет на себе тяжелое бремя главного дизайнера и технического директора  нашей студии.'
+        }
+      //- Launch Mixin
+      +createJumbo(aboutJumbo) 
+      div.row
+        //-Data set for mixin
+        -
+          var workerList = [
+            {
+              job: 'Главный разработчик',
+              name: 'Мухамедьяров Артур Искандарович',
+              about: 'Именно на его плечи ложиться вся рабочая составляющая вашего сайта. То, как продукт будет реагировать на действия пользователя, а так-же его визуальная составляющая полностью зависят от мастерства разработчика. Именно поэтому мы провели максимально жесткий отбор на данную вакансию и выявили лучшего спциалиста в данной области'
+            },
+            {
+              job: 'Ведущий дизайнер',
+              name: 'Мухамедьяров Артур Искандарович',
+              about: 'Визуальная составляющая сайта - это ваше лицо. Наш специально обученный дизайнер способен создать невообразимые пользовательские интерфейсы, способные увлеч любого покупателя и вызвать у него эстетический оргазм. Работая в связке с нашим ведущим разработчиком, на свет появляются творения, достойные только лишь глаз самого Апполона.'
+            },
+            {
+              job: 'SMM - специалист',
+              name: 'Мухамедьяров Артур Искандарович',
+              about: 'Вам не придется беспокоиться о контенте, размещенном на вашем сайте, если за него будет отвечать на SMM - специалист. В его задачи входит поиск и привлечение действительно заинтересованных и платежеспособных покупателей, путем грамотного составления заполняющего страницу контента. Наш работник был одним из лучших торгашей на вещем рынке и мы нашли его незурядным способностям лучшее применение.'
+            }
+          ];
+
+        //-Mixin for about page
+        mixin developer(worker)
+          div.col-md-4
+            h3.text-center #{worker.job}
+            p.lead.text-muted.mb-2.text-center #{worker.name}
+            p #{worker.about}
+            p
+              a.btn.btn-outline-primary(href="https://vk.com/id222963923") Связаться
+
+        for worker in workerList
+          +developer(worker)
+
+    //Services
+    div.container#services
+      //-Data for jumbotron
+      -
+        var servicesJumbo = {
+          title: 'Предоставляемые услуги',
+          text: 'Мы предлагаем Вам ознакомиться с перечнем услуг, которые мы любезно готовы предоставить нашим покупателям за сообветствующее вознаграждение. Если Вы не нашли интересующую Вас услугу в списке ниже, то вы можете связаться с нами и мы обязательно рассмотрим ваше предложение!'
+        }
+      //-Launch Mixin
+      +createJumbo(servicesJumbo)
+
+      //-Data for serviceCard mixin
+      -
+        var services = [
+          {
+            name: 'Дизайн',
+            price: {
+              value: '₽5649',
+              tag: '/ раб.'
+            },
+            offers: [
+              'Полный макет',
+              'Ваши пожелания',
+              'Цветовая палитра',
+              'PSD - файл'
+            ]
+          },
+          {
+            name: 'Верстика',
+            price: {
+              value: '₽8990',
+              tag: '/ раб.'
+            },
+            offers: [
+              'Webpack',
+              'JS/CSS - анимации',
+              'HTML код',
+              'Поддержка 15 дней'
+            ]
+          },
+          {
+            name: 'Поддержка',
+            price: {
+              value: '₽4990',
+              tag: '/ мес.'
+            },
+            offers: [
+              'Серверная часть',
+              'Отслеживание багов',
+              'Обезопашивание',
+              'DDOS - атаки'
+            ]
+          },
+          {
+            name: 'SMM - услуги',
+            price: {
+              value: '₽7560',
+              tag: '/ мес.'
+            },
+            offers: [
+              'Ваши пожелания',
+              'Создание контента',
+              'Реклама',
+              'Новые клиенты'
+            ]
+          }
+        ]
+      //-Mixin for services page
+      mixin serviceCard(service)
+        div.card.mb-4.box-shadow
+          div.card-header
+            h4.my-0.font-weight-normal #{service.name}
+          div.card-body
+            h1.card-title.pricing-card-title #{service.price.value}
+              small.text-muted #{service.price.tag}
+            ul.list-unstyled.mt-3.mb-4
+              for offer in service.offers
+                li #{offer}
+            button.btn.btn-lg.btn-primary.btn-block(type='button') Заказать
+
+      div.card-deck.text-center
+        for service in services
+          +serviceCard(service)
+
+    //Contacts
+    div.container#contacts
+      //-Data for Jumbotron
+      -
+        var contactsJumbo = {
+          title: 'Контактная информация',
+          text: 'Усли вы заинтересованы в получении каких-либо особых услуг, или же хотите задать вопрос - звоните/пишите/приходите - вся контактная информация приведена ниже. Если же вы хотите оставить заявку на заказ - воспользуйтесь формой в правой части экрана.'
+        }
+      //-Lauch Mixin
+      +createJumbo(contactsJumbo)
+
+      div.row
+        div.col-md-7
+          div.card.mb-3.box-shadow
+            script(type="text/javascript", 
+              charset="utf-8", async, 
+              src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A52bb03defb2e906f86b6d10a9daf7626ad323490cd5824f969469027fd6c593a&amp;width=100%25&amp;height=400&amp;lang=ru_RU&amp;scroll=true"
+            )
+            h4.card-title.font-weight-normal.my-0.mb-3.ml-3.mt-3 Контактная информация
+            ul.list-unstyled.mt-3.mb-4.ml-3
+              li <em>E-mail:</em> BDSW@yandex.ru
+              li <em>Телефон:</em> 8 (977) 365-67-35
+              li <em>Адрес:</em> Химочки. ул. Молодежная, д.70, коробка у мусорного контейнера
+
+        div.col-md-5
+          label(for="name") Имя
+          input.form-control.mb-4#name(type="text", name="", placeholder="Иван")
+
+          label(for="surname") Фамилия
+          input.form-control.mb-4#surname(type="text", name="", placeholder="Иванов")
+
+          label(for="famname") Отчество
+          input.form-control.mb-4#famname(type="text", name="", placeholder="Иванович")
+
+          label(for="mail") Email
+          div.input-group.mb-4
+            input.form-control#mail(type="email", name="mail", placeholder="ihaveasmalldick")
+            div.input-group-append
+            span.input-group-text @gmail.com
+
+          label(for="serv") Выберите услугу...
+          select.custom-select.mb-4#serv
+            option(select) Выберите...
+            option(value="1") Дизайн
+            option(value="2") Верстка
+            option(value="3") Поддержка
+            option(value="4") SMM-услуги
+
+          label(for="rev") Особые пожелания
+          textarea.form-control.mb-5#rev(name="") Никаких)
+
+          div.text-center
+            button.btn.btn-lg.btn-success.btn-block(type="button") Отправить
+
+    //Footer
+    div.container
+      footer.pt-4.my-md-5.pt-md-5.border-top
+        div.row
+          div.col-12.col-md
+            img.mb-2(src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg", alt="", width="24", height="24")
+            small.d-block.mb-3.text-muted Мухамедьяров А.И<br> BadDogStd.<br>© 2018-2019
+          div.col-6.col-md
+            h5 Главная
+            ul.list-unstyled.text-small
+              li: a.text-muted(href="#") Заказать
+              li: a.text-muted(href="#") Контакты
+              li: a.text-muted(href="#") информация
+          div.col-6.col-md
+            h5 Услуги
+            ul.list-unstyled.text-small
+              li: a.text-muted(href="#") Дизайн
+              li: a.text-muted(href="#") Верстка
+              li: a.text-muted(href="#") Поддержка
+              li: a.text-muted(href="#") SMM-услуги
+          div.col-6.col-md
+            h5 О нас
+            ul.list-unstyled.text-small
+              li: a.text-muted(href="#") Общее
+              li: a.text-muted(href="#") Работник месяца
+              li: a.text-muted(href="#") Разработчик
+              li: a.text-muted(href="#") Дизайнер
+              li: a.text-muted(href="#") SMM-специалист
+
+    // Imports
+    script(src="https://code.jquery.com/jquery-3.3.1.slim.min.js", 
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo", 
+      crossorigin="anonymous"
+    )
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js", 
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49", 
+      crossorigin="anonymous"
+    )
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js", 
+      integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T", 
+      crossorigin="anonymous"
+    )
